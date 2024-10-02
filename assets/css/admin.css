@@ -1,0 +1,93 @@
+header{
+    background: #032627;
+    height:66px;
+}
+
+.admin-wrapper{
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns:  1fr 5fr;
+}
+
+.left-sidebar,.admin-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:start;
+     border: 1px solid rgb(21, 122, 21);
+}
+
+
+
+.admin-wrapper .left-sidebar{
+    width:100%;
+    background-color: #234a57;
+}
+
+.admin-wrapper .left-sidebar ul{
+    list-style: none;
+    margin:0px;
+    padding:0px;
+    color:aliceblue;
+}
+
+.admin-wrapper .left-sidebar ul li a{
+    padding:10px;
+    display:block;
+    border-bottom:1px solid #004004;
+}
+
+.admin-wrapper .left-sidebar ul li a:hover{
+    background-color: #004004;
+}
+/* .admin-content{
+    flex:2;
+    height:100%;
+    border: 1px solid red;
+} */
+
+.admin-content{
+    height:100%;
+    padding:40px 100px 100px;
+    overflow-y:scroll;
+}
+
+.page-title{
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;
+    font-size:1.1rem;
+
+}
+
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #d3d3d3;
+}
+
+.edit{
+    color:green;
+}
+
+.delete{
+    color:red;
+}
+
+.publish{
+    color:blue;
+}
+
+.edit:hover,.delete:hover,.publish:hover{ 
+    text-decoration: underline;
+}
+
+form div{
+    margin-bottom: 15px;
+}
