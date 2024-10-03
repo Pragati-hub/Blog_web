@@ -12,8 +12,7 @@
             </li>
             <li><a href="./about.php">About</a></li>
             <li><a href="./service.php">Services</a></li>
-            <li><a href="<?php echo BASE_URL . '/admin/topics/create.php' ?>">Dashboard</a></li>
-            <?php if  (isset($_SESSION['id'])):  ?>
+                        <?php if  (isset($_SESSION['id'])):  ?>
                 <li><a href="#">
                     <?php echo $_SESSION['username']; ?>
                     <img class="arrow" src="assets/images/down-arrow.png" alt="Logo" height="20px"

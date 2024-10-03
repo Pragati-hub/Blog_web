@@ -1,5 +1,7 @@
 <?php include("../path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/posts.php"); ?>
+<?php include(ROOT_PATH . "/app/controllers/posts.php");
+adminOnly();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Candal&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.1.1/ckeditor5.css">
-    <title>Admin Section- Dashboard</title>
+    <title>Admin Section-Add Posts</title>
 
 </head>
 <body>
@@ -33,12 +35,12 @@
     <?php include(ROOT_PATH . "/app/includes/adminSidebar.php"); ?>
         <!-- Admin content -->
         <div class="admin-content">
-      
+       
 
         <div class="content">
             <h2 class="page-title">Dashboard</h2>
 
-            <?php include(ROOT_PATH . "/app/includes/message.php"); ?>  
+            <?php include(ROOT_PATH . "/app/includes/messages.php"); ?>  
 
          
         </div>

@@ -1,8 +1,22 @@
 <?php include("path.php")?>
-<?php include(ROOT_PATH . "/app/controllers/topics.php"); 
+<?php include(ROOT_PATH . "/app/controllers/topics.php"); ?>
 
-// $posts = selectAll('posts', ['published' ==> 1]);
-// dd($posts);
+<?php
+
+$posts = array();
+$postsTitle = 'Recent Posts';
+
+
+if (isset($_POST['search-term'])){
+$postsTitle =  'Search Results for "' . $_POST['search-term'] . '"';
+
+
+    $posts =  searchPosts($_POST['search-term']);
+} else
+{
+    $posts = getPublishedPosts();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,78 +54,23 @@
             <img class="next" src="assets/images/right-arrow.png" alt="Logo" height="20px" />
 
             <div class="post-wrapper">
+
+            <?php foreach ($posts as $post) : ?>
                 <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
+                    <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image" width=100% height=60%>
                     <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
+                        <h4><a href="single.php?id=<?php echo $post['id']; ?>"><?php  echo $post['title']; ?></a></h4
+
+                        <i class=" "> <?php echo $post['username']; ?></i>
+
                         &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
+                        <i class=""> <?php echo date('F j,Y',strtotime($post['created_at'])); ?></i>
                     </div>
                 </div>
-
-                <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
-                    <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
-                        &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
-                    <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
-                        &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
-                    <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
-                        &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
-                    <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
-                        &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/images/img-1.jpg" alt="" class="slider-image" width=100% height=60%>
-                    <div class="post-info">
-                        <h4><a href="single.php">One day your life will flash before your eyes</a></h4>
-                        <i class=""> Pragati Gupta</i>
-                        &nbsp;
-                        <i class=""> Mar 8, 2019</i>
-
-
-                    </div>
-                </div>
-                <!-- // Post Slider -->
+            <?php endforeach; ?>
+                
+</div>
+          <!-- // Post Slider -->
 
             </div>
             <!-- // Post Slider -->
@@ -119,78 +78,34 @@
             <div class="content clearfix">
                 <div class="content">
                     <div class="main-content">
-                        <h1 class="recent-post-title">Recent Posts</h1>
-
-                        <div class="post">
-                            <img src="assets/images/img-6.jpg " alt="" class="post-image">
+                        <h1 class="recent-post-title"><?php echo $postsTitle ?></h1>
+                      
+                        <?php foreach ($posts as $post) : ?>
+                        
+                            <div class="post clearfix">
+                            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
                             <div class="post-preview">
-                                <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a>
+                                <h2><a href="single.php?id=<?php echo $post['id']; ?>"><?php  echo $post['title']; ?></a>
                                 </h2>
-                                <i class=""> Pragati Gupta</i>
+                                <i class=""> <?php echo $post['username']; ?></i>
                                 &nbsp;
-                                <i class=""> Mar 11, 2019</i>
+                                <i class=""> <?php echo date('F j,Y',strtotime($post['created_at'])); ?></i>
                                 <p class="preview-text">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                    Exercitationem optio possimus a inventore maxime laborum.
+                                   <?php echo html_entity_decode(substr($post['body'], 0, 150)  . '...'); ?>
+
                                 </p>
-                                <a href="single.php" class="btn read-more">Read More</a>
+                                <a href="single.php?id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
                             </div>
                         </div>
-
-                        <div class="post">
-                            <img src="assets/images/img-6.jpg " alt="" class="post-image">
-                            <div class="post-preview">
-                                <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a>
-                                </h2>
-                                <i class=""> Pragati Gupta</i>
-                                &nbsp;
-                                <i class=""> Mar 11, 2019</i>
-                                <p class="preview-text">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                    Exercitationem optio possimus a inventore maxime laborum.
-                                </p>
-                                <a href="single.php" class="btn read-more">Read More</a>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img src="assets/images/img-6.jpg " alt="" class="post-image">
-                            <div class="post-preview">
-                                <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a>
-                                </h2>
-                                <i class=""> Pragati Gupta</i>
-                                &nbsp;
-                                <i class=""> Mar 11, 2019</i>
-                                <p class="preview-text">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                    Exercitationem optio possimus a inventore maxime laborum.
-                                </p>
-                                <a href="single.php" class="btn read-more">Read More</a>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img src="assets/images/img-6.jpg " alt="" class="post-image">
-                            <div class="post-preview">
-                                <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a>
-                                </h2>
-                                <i class=""> Pragati Gupta</i>
-                                &nbsp;
-                                <i class=""> Mar 11, 2019</i>
-                                <p class="preview-text">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                    Exercitationem optio possimus a inventore maxime laborum.
-                                </p>
-                                <a href="single.php" class="btn read-more">Read More</a>
-                            </div>
-                        </div>
-
-
-                    </div>
+                            
+                         <?php endforeach; ?>
+                        
+            </div>  
+        </div>
                     <div class="sidebar">
                         <div class="section search">
                             <h2 class="section-title">Search</h2>
-                            <form action="index.html" method="post">
+                            <form action="index.php" method="post">
                                 <input type="text" name="search-term" class="text-input" placeholder="Search...">
                             </form>
                         </div>
@@ -201,7 +116,8 @@
 
 
                 <?php foreach ($topics as $key => $topic):  ?>
-                    <li><a href="#"><?php echo $topic['name']; ?></a></li>
+                    <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id']?>"><?php  echo $topic['name']; ?></a></li>
+
                  <?php endforeach; ?>
 
                                

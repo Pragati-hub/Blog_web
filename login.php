@@ -1,5 +1,7 @@
 <?php include("path.php") ?>
-<?php include(ROOT_PATH . "/app/controllers/users.php"); ?>
+<?php include(ROOT_PATH . "/app/controllers/users.php"); 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +40,7 @@
                 <input type="password" name="password" value="<?php echo $password;?>" class="text-input">
             </div>
             <div>
-                <button type="submit" name="login-btn" class="btn btn-big">Register</button>
+                <button type="submit" name="login-btn" class="btn btn-big">Login</button>
                 <p>Or<a href="<?php echo BASE_URL . 'Register.php'?>">Sign Up</a></p>
             </div>
     </div>

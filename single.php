@@ -1,4 +1,13 @@
 <?php include("path.php") ?>
+<?php include(ROOT_PATH . '/app/controllers/posts.php'); 
+
+if (isset($_GET['id'])){
+  $post = selectOne('posts' , ['id' => $_GET['id']]);
+}
+$topics =  selectAll('topics');
+$posts = selectAll('posts',['published' => 1]);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +25,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Candal&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
-    <title>Single Post</title>
+    <title><?php echo $post['title']; ?> | BlogInspires</title>
 
+ 
 </head>
 
 <body>
@@ -30,23 +40,10 @@
                 <div class="content">
                     <!-- Main content -->
                     <div class="main-content single">
-                <h1 class="post-title">This is the titile of the Post</h1>
+                <h1 class="post-title"><?php echo $post['title']; ?></h1>
                         
                 <div class="post-content">
-                    <p>One day, your entire life will flash before your eyes, and in that moment, all the decisions, memories, and experiences will unfold like a movie. It’s a moment we all will face, and it will force us to reflect on how we’ve lived, loved, and learned.</p>
-
-                    <p>When that moment arrives, what do you want to see? Will it be filled with regrets for the risks you didn’t take or the dreams you let slip away? Or will it be a tapestry of bold choices, of love given and received, and the pursuit of your passions?</p>
-                    
-                    <p>Every day is a new page in that story. The actions you take, the words you say, and the people you touch all contribute to the narrative that will eventually define your life. You hold the pen—how will you write your story?</p>
-                    
-                    <p>It’s easy to get caught up in the routine of life, letting days blur into weeks, and weeks into years. But remember, the moments that will flash before your eyes will not be the mundane ones. They will be the moments where you were truly alive—when you followed your heart, pursued your purpose, and connected deeply with others.</p>
-                    
-                    <p>The things we often worry about—like material success, recognition, or superficial achievements—won’t matter in that final reel. What will matter are the relationships you nurtured, the lives you impacted, and the legacy you left behind. Did you live authentically? Did you give love freely? Did you chase the dreams that set your soul on fire?</p>
-                    
-                    <p>Now is the time to live intentionally. Don’t wait for the distant future to create the life you desire. Live with purpose now, so that when your life does flash before your eyes, you can smile knowing you made the most of every moment.</p>
-                    
-                    <p>In the end, it’s not the years in your life that count, but the life in your years. Make every moment count, and let your story be one worth watching.</p>
-                    
+               <?php echo html_entity_decode($post['body']) ?>        
                 </div>
 
                     </div>
@@ -84,13 +81,11 @@
                         <div class="section topics">
                             <h2 class="section-title">Topics</h2>
                             <ul>
-                                <li><a href="#">Poems</a></li>
-                                <li><a href="#">Quotes</a></li>
-                                <li><a href="#">Fiction</a></li>
-                                <li><a href="#">Biography</a></li>
-                                <li><a href="#">Motivation</a></li>
-                                <li><a href="#">Inspiration</a></li>
-                                <li><a href="#">Life lessons</a></li>
+                            <?php foreach ($topics as $topic): ?>
+
+                            <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id']?>"><?php  echo $topic['name']; ?></a></li>
+
+                               <?php endforeach  ?>
                             </ul>
                         </div>
                     </div>
